@@ -232,21 +232,8 @@ Status SeqListMerge(SeqList* La, SeqList* Lb, SeqList* Lc){
 
 
 int main() {
-    SeqList list1, list2, list3;
+    SeqList list1, list2;
     int m = 1, n = 3;
-    /*
-    SeqListInit(&list1);
-    len = SeqListLength(&list1);
-    printf("len: %d\n", len);
-    
-    SeqListInsert(&list1, 1, 1);
-    SeqListInsert(&list1, 2, 2);
-    SeqListInsert(&list1, 3, 3);
-    
-    SeqListTraverse(&list1);
-    len = SeqListLength(&list1);
-    printf("%d", len);
-    */
     
     
     SeqListInit(&list1);
@@ -256,25 +243,7 @@ int main() {
         SeqListInsert(&list2, n++, i);
     }
     SeqListTraverse(&list1);
-    /*
-    SeqListLength(&list1);
-    SeqListGet(&list1, 3);
-    SeqListLocate(&list1, 2);
-    SeqListPrior(&list1, 3);
-    SeqListNext(&list1, 3);
-    
-    SeqListInsert(&list1, 0, 1);
-    SeqListLength(&list1);
-    
-   
-    SeqListDel(&list1, 1);
-    SeqListTraverse(&list1);
-    SeqListEmpty(&list1);
-    
-    SeqListMerge(&list1, &list2, &list3);
-    SeqListTraverse(&list3);
-    */
-    
+        
 }
 
 
