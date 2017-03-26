@@ -98,10 +98,9 @@ void Bubble(LinkedList* L){
 
 
 LinkedList LinkedListSort (LinkedList* La, LinkedList* Lb){
-    LinkedList Lc, pa, pc;
+    LinkedList Lc, pa;
     
     Lc = *Lb;
-    pc = Lc;
     pa = (*La) -> next;
     
     while (pa -> next != NULL) {
