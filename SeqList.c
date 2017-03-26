@@ -1,10 +1,3 @@
-//
-//  main.c
-//  顺序表的操作
-//
-//  Created by Alchemist on 17/3/4.
-//  Copyright © 2017年 Ry Shen. All rights reserved.
-//
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,11 +13,11 @@ typedef enum Status{
 typedef int ElementType;
 
 //定义结构体
-              //struct的标识符
+//struct的标识符
 typedef struct node {
     ElementType data[MAX_SIZE];
     int length;
- //别名,而当没有typedef时才是其中的一个变量，此时不用定义可直接用
+    //别名,而当没有typedef时才是其中的一个变量，此时不用定义可直接用
 }SeqList;
 
 
@@ -59,7 +52,7 @@ int SeqListLength(SeqList* L){
 ElementType SeqListGet(SeqList* L, int i){
     
     if (i < 1 || i > L->length){
-        printf("The value of i is illegal");
+        printf("The value of i is illegal\n");
         exit(0);      //程序正常退出的库函数<stdlib.h>
     }
     else {
@@ -123,7 +116,7 @@ ElementType SeqListNext(SeqList* L, ElementType elem){
 Status SeqListInsert(SeqList* L, ElementType elem, int i){
     
     if (i < 1 || i > L->length + 1){
-        printf("The value of i is illegal");
+        printf("The value of i is illegal\n");
         return 1;
     }
     if (L->length == MAX_SIZE){
@@ -185,11 +178,20 @@ Status SeqListUnion(SeqList* La, SeqList* Lb){
         for (int i = 1; i <= Lb->length; i++){
             elem = SeqListGet(Lb, i);
             if (SeqListLocate(La, elem) == 0){
-                status = SeqListInsert(La, 1, elem);
+                
+                status = SeqListInsert(La, elem, 1);
                 if(status == 0){
                     break;
                 }
                 
+            }
+        }
+    }
+    
+    else {
+        for (int i = 1; i<= La->length; i++){
+            if (SeqListGet(Lb, Lb->data[i]) == 0){
+                SeqListInsert(La, Lb->data[i], 1);
             }
         }
     }
@@ -199,21 +201,23 @@ Status SeqListUnion(SeqList* La, SeqList* Lb){
 
 //保序合并
 Status SeqListMerge(SeqList* La, SeqList* Lb, SeqList* Lc){
-    int i = 1, j = 1, k = 1;
+    int i = 1, j = 1, k = 0;
     Status status = 1;
     
     status = SeqListInit(Lc);
     
     while(i <= La->length && j <= Lb->length ){
         if(SeqListGet(La,i) <= SeqListGet(Lb, j) ){
-            status = SeqListInsert(Lc, k, SeqListGet(La, i));
+            status = SeqListInsert(Lc, SeqListGet(La, i), k + 1);
             i++;
+            k++;
         }
         else {
-            status = SeqListInsert(Lc, k, SeqListGet(Lb, j));
+            status = SeqListInsert(Lc, SeqListGet(Lb, j),  k + 1);
             j++;
+            k++;
         }
-        k++;
+        
     }
     while(i <= SeqListLength(La)){
         SeqListInsert(Lc, k, SeqListGet(La, i));
@@ -226,24 +230,47 @@ Status SeqListMerge(SeqList* La, SeqList* Lb, SeqList* Lc){
         j++;
         k++;
     }
+    Lc->length = k;
     return status;
 }
 
 
 
 int main() {
-    SeqList list1, list2;
-    int m = 1, n = 3;
-    
+    SeqList list1, list2, list3;
+    int len, m =4;
     
     SeqListInit(&list1);
-    for(int i = 1; i < 5; i++){
-        
-        SeqListInsert(&list1, m++, i);
-        SeqListInsert(&list2, n++, i);
+    len = SeqListLength(&list1);
+    printf("len: %d\n", len);
+    
+    for (int i = 1; i <= 3; i++){
+        SeqListInsert(&list1, i, i);
     }
+    
+    for (int i = 1; i <= 3; i++){
+        SeqListInsert(&list2, m++, i);
+    }
+    
+    SeqListTraverse(&list2);
+    len = SeqListLength(&list1);
+    printf("len :%d\n", len);
+    
+    
+    printf("the second elem: %d\n", SeqListGet(&list1, 3));
+    printf("the location : %d\n", SeqListLocate(&list1, 2));
+    printf("the prior of 3: %d\n",SeqListPrior(&list1, 3));
+    printf("the next of 2: %d\n",SeqListNext(&list1, 2));
+    
+    
+    SeqListInsert(&list1, 0, 1);
     SeqListTraverse(&list1);
-        
+    
+    
+    printf("is empty: %d\n", SeqListEmpty(&list1));
+    
+    SeqListMerge(&list1, &list2, &list3);
+    SeqListTraverse(&list3);
+    
+    
 }
-
-
