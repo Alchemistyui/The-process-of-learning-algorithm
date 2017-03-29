@@ -1,3 +1,10 @@
+//
+//  main.c
+//  顺序表的操作
+//
+//  Created by Alchemist on 17/3/4.
+//  Copyright © 2017年 Ry Shen. All rights reserved.
+//
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -208,25 +215,25 @@ Status SeqListMerge(SeqList* La, SeqList* Lb, SeqList* Lc){
     
     while(i <= La->length && j <= Lb->length ){
         if(SeqListGet(La,i) <= SeqListGet(Lb, j) ){
-            status = SeqListInsert(Lc, SeqListGet(La, i), k + 1);
+            status = SeqListInsert(Lc, SeqListGet(La, i),k + 1);
             i++;
             k++;
         }
         else {
-            status = SeqListInsert(Lc, SeqListGet(Lb, j),  k + 1);
+            status = SeqListInsert(Lc, SeqListGet(Lb, j), k + 1);
             j++;
             k++;
         }
         
     }
     while(i <= SeqListLength(La)){
-        SeqListInsert(Lc, k, SeqListGet(La, i));
+        SeqListInsert(Lc, SeqListGet(La, i), k + 1);
         
         i++;
         k++;
     }
     while(j <= SeqListLength(Lb)){
-        SeqListInsert(Lc, k, SeqListGet(Lb, j));
+        SeqListInsert(Lc, SeqListGet(Lb, j), k + 1);
         j++;
         k++;
     }
@@ -252,7 +259,7 @@ int main() {
         SeqListInsert(&list2, m++, i);
     }
     
-    SeqListTraverse(&list2);
+    SeqListTraverse(&list1);
     len = SeqListLength(&list1);
     printf("len :%d\n", len);
     
@@ -274,3 +281,5 @@ int main() {
     
     
 }
+
+
