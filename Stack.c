@@ -99,7 +99,7 @@ void LinkedStackInit (LinkedStack* S);
 bool LinkedStackIsEmpty (LinkedStack* S);
 void LinkedStakePush (LinkedStack* S, ElementType elem);
 ElementType LinkedListPop (LinkedStack* S);
-
+ElementType LinkedStackGetTop (LinkedStack* S);
 
 
 
