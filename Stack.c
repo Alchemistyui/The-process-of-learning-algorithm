@@ -98,7 +98,7 @@ typedef struct{
 void LinkedStackInit (LinkedStack* S);
 bool LinkedStackIsEmpty (LinkedStack* S);
 void LinkedStakePush (LinkedStack* S, ElementType elem);
-ElementType LinkedListPop (LinkedStack* S);
+ElementType LinkedStackPop (LinkedStack* S);
 ElementType LinkedStackGetTop (LinkedStack* S);
 
 
@@ -148,7 +148,7 @@ ElementType LinkedStackGetTop (LinkedStack* S){
 
 
 
-ElementType LinkedListPop (LinkedStack* S){
+ElementType LinkedStackPop (LinkedStack* S){
     int elem;
     LStackNode* p;
     
@@ -168,6 +168,10 @@ ElementType LinkedListPop (LinkedStack* S){
 
 
 
+
+
+
+
 int main (){
     SeqStack S;
     LinkedStack LS;
@@ -175,8 +179,8 @@ int main (){
     SeqStackInit(&S);
     printf("empty?: %d\n", IsEmpty(&S));
     for (int i = 0; i <4; i++){
-         Push(&S, i);
-         printf("top element: %d\n", GetTop(&S));
+        Push(&S, i);
+        printf("top element: %d\n", GetTop(&S));
     }
     Pop(&S);
     printf("now top: %d\n", GetTop(&S));
@@ -191,16 +195,11 @@ int main (){
         LinkedStakePush(&LS, i);
         printf("top element: %d\n", LinkedStackGetTop(&LS));
     }
-    LinkedListPop(&LS);
+    LinkedStackPop(&LS);
     printf("now top: %d\n", LinkedStackGetTop(&LS));
     printf("empty?: %d\n", LinkedStackIsEmpty(&LS));
-
+    
 }
-
-
-
-
-
 
 
 
