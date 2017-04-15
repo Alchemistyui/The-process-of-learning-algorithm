@@ -369,7 +369,7 @@ void LinkedListReverseSort(LinkedList* La, LinkedList* Lb){
 
 void LinkedListTraverse(LinkedList* L){
     LinkedList p;
-    p = *L;
+    p = (*L)->next;
     
     while(p != NULL){
         printf("%d ", p->data);
