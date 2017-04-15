@@ -73,7 +73,7 @@ Status LinkedListCreate1(LinkedList* L, ElementType a[], int n){
 
 void LinkedListTraverse(LinkedList* L){
     LinkedList p;
-    p = *L;
+    p = (*L)->next;
     
     while(p != NULL){
         printf("%c", p->data);
